@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 import styles from '../styles/Home.module.css';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CardContainer from '../components/CardContainer';
 
 const theme = createTheme({
   palette: {
@@ -28,7 +29,9 @@ const Home: NextPage = () => {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Navbar title="AINews" />
-        <main className={styles.main}></main>
+        <main className={styles.main}>
+          <CardContainer />
+        </main>
 
         <footer className={styles.footer}></footer>
       </div>
