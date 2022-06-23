@@ -4,18 +4,30 @@ import {
   Box,
   List,
   ListItem,
+  ListItemIcon,
   ListItemButton,
   ListItemText,
   IconButton,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+import WhatshotIcon from '@mui/icons-material/Whatshot';
+import HowToVoteIcon from '@mui/icons-material/HowToVote';
+import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
+import PublicIcon from '@mui/icons-material/Public';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import NightlifeIcon from '@mui/icons-material/Nightlife';
+import DevicesIcon from '@mui/icons-material/Devices';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import SportsBaseballIcon from '@mui/icons-material/SportsBaseball';
 
 type Props = {
   pages: string[];
 };
 
 const Drawer: React.FC<Props> = ({ pages }) => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const drawerWidth = 200;
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
@@ -27,12 +39,25 @@ const Drawer: React.FC<Props> = ({ pages }) => {
         return;
       }
 
-      setMenuOpen(open);
+      setIsMenuOpen(open);
     };
+
+  const menuItemIcon = [
+    <AccessTimeFilledIcon />,
+    <WhatshotIcon />,
+    <HowToVoteIcon />,
+    <ConnectWithoutContactIcon />,
+    <PublicIcon />,
+    <SportsEsportsIcon />,
+    <NightlifeIcon />,
+    <DevicesIcon />,
+    <AttachMoneyIcon />,
+    <SportsBaseballIcon />,
+  ];
 
   const list = () => (
     <Box
-      sx={{ width: 250 }}
+      sx={{ width: drawerWidth, mt: '64px' }}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
@@ -41,9 +66,7 @@ const Drawer: React.FC<Props> = ({ pages }) => {
         {pages.map((page, index) => (
           <ListItem key={page} disablePadding>
             <ListItemButton>
-              {/* <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon> */}
+              <ListItemIcon>{menuItemIcon[index]}</ListItemIcon>
               <ListItemText primary={page} />
             </ListItemButton>
           </ListItem>
@@ -59,16 +82,24 @@ const Drawer: React.FC<Props> = ({ pages }) => {
         aria-label="account of current user"
         aria-controls="menu-appbar"
         aria-haspopup="true"
-        onClick={toggleDrawer(true)}
+        onClick={toggleDrawer(!isMenuOpen)}
         color="secondary"
       >
         <MenuIcon />
       </IconButton>
       <SwipeableDrawer
         anchor={'left'}
-        open={menuOpen}
+        open={isMenuOpen}
         onClose={toggleDrawer(false)}
         onOpen={toggleDrawer(true)}
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          [`& .MuiDrawer-paper`]: {
+            width: drawerWidth,
+            boxSizing: 'border-box',
+          },
+        }}
       >
         {list()}
       </SwipeableDrawer>

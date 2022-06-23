@@ -11,14 +11,8 @@ import {
   Button,
   Tooltip,
   MenuItem,
-  SwipeableDrawer,
-  List,
-  ListItem,
-  ListItemButton,
-  // ListItemIcon,
-  ListItemText,
 } from '@mui/material';
-import Drawer from '../Drawer/Drawer';
+import Drawer from '../Drawer';
 import SearchBar from '../SearchBar';
 
 const pages = [
@@ -51,7 +45,7 @@ const Navbar: React.FC<Props> = ({ title }) => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="fixed" sx={{ zIndex: theme => theme.zIndex.drawer + 1 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* screen logo */}
